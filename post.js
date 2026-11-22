@@ -53,7 +53,7 @@ async function dirSize(dir_path) {
         try {
           const stat = await fs.stat(p);
           total += stat.size;
-        } catch {
+        } catch (err) {
           core.warning(`Failed to stat ${p}: ${err}`);
         }
       }

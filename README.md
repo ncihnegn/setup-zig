@@ -1,7 +1,11 @@
 # setup-zig
 
-Install the Zig compiler for use in a Forgejo Actions or GitHub Actions workflow, and preserve the Zig cache
+Install the Zig compiler for use in a GitHub Actions workflow, and preserve the Zig cache
 across workflow runs.
+
+> [!NOTE]
+> Forked from [`mlugg/setup-zig`](https://codeberg.org/mlugg/setup-zig) with the `v3` release line
+> updated to target the **Node.js 24** (`node24`) GitHub Actions runtime.
 
 ## Usage
 
@@ -11,17 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Test
     steps:
-      - uses: actions/checkout@v3
-      - uses: https://codeberg.org/mlugg/setup-zig@v2
+      - uses: actions/checkout@v7
+      - uses: ncihnegn/setup-zig@v3
       - run: zig build test
 ```
-
-> [!IMPORTANT]
-> When using GitHub Actions, the `setup-zig` URL in the example above must be replaced with a simple
-> repository reference, because GitHub Actions does not support Actions hosted outside of GitHub:
-> ```yaml
->       - uses: mlugg/setup-zig@v2
-> ```
 
 This will automatically download Zig and install it to `PATH`.
 
@@ -33,7 +30,7 @@ the Zig version from the `minimum_zig_version` field in `build.zig.zon`, falling
 isn't possible.
 
 ```yaml
-  - uses: https://codeberg.org/mlugg/setup-zig@v2
+  - uses: ncihnegn/setup-zig@v3
     with:
       version: 0.13.0
 ```
@@ -45,7 +42,7 @@ isn't possible.
 If you want to use one specific mirror, you can set it using the `mirror` option:
 
 ```yaml
-  - uses: https://codeberg.org/mlugg/setup-zig@v2
+  - uses: ncihnegn/setup-zig@v3
     with:
       mirror: 'https://pkg.machengine.org/zig'
 ```
